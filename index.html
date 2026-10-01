@@ -3,180 +3,1537 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Maşa Çorba Döner</title>
 
 <style>
-body{margin:0;font-family:Arial,sans-serif;background:#f4f4f4}
-header{background:#000;color:#fff;display:flex;align-items:center;gap:15px;padding:10px}
-header img{height:50px}
-nav{display:flex;justify-content:center;gap:8px;padding:10px;background:#fff;flex-wrap:wrap}
-nav button{padding:8px 14px;border-radius:8px;border:1px solid #ccc;background:#fff;font-weight:bold;cursor:pointer}
-nav button.active{background:#000;color:#fff}
-.section{display:none;padding:20px}
-.section.active{display:block}
-.card{background:#fff;border-radius:10px;padding:15px;margin-bottom:15px}
-.prices{display:flex;gap:10px;margin-top:10px;flex-wrap:wrap}
-.price-box{flex:1;min-width:120px;background:#eee;border-radius:8px;padding:10px;text-align:center}
+
+*{
+    box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    margin:0;
+    font-family:Arial, Helvetica, sans-serif;
+    background:#f4f0e8;
+    color:#171717;
+}
+
+
+/* =========================
+   HEADER
+========================= */
+
+header{
+    background:#111;
+    color:white;
+    text-align:center;
+    padding:28px 20px 24px;
+    border-bottom:4px solid #8d1d22;
+}
+
+.logo{
+    width:85px;
+    height:85px;
+    object-fit:contain;
+    margin-bottom:10px;
+}
+
+.restaurant-name{
+    font-family:Georgia, serif;
+    font-size:30px;
+    font-weight:bold;
+    letter-spacing:.5px;
+}
+
+.subtitle{
+    margin-top:7px;
+    color:#d8c8aa;
+    font-size:14px;
+    letter-spacing:1.5px;
+}
+
+
+/* =========================
+   ACTION BUTTONS
+========================= */
+
+.actions{
+    max-width:900px;
+    margin:0 auto;
+    padding:16px 16px 8px;
+
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:10px;
+}
+
+.action-btn{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:8px;
+
+    text-decoration:none;
+
+    padding:13px 10px;
+
+    border-radius:11px;
+
+    font-size:13px;
+    font-weight:bold;
+
+    transition:.2s;
+}
+
+.action-btn:hover{
+    transform:translateY(-2px);
+}
+
+.call{
+    background:#8d1d22;
+    color:white;
+}
+
+.maps{
+    background:#222;
+    color:white;
+}
+
+.review{
+    background:#e7c15a;
+    color:#222;
+}
+
+
+/* =========================
+   CATEGORY MENU
+========================= */
+
+nav{
+    position:sticky;
+    top:0;
+    z-index:100;
+
+    background:#fff;
+
+    border-bottom:1px solid #ddd;
+
+    box-shadow:0 3px 15px rgba(0,0,0,.08);
+
+    display:flex;
+    gap:8px;
+
+    padding:12px;
+
+    overflow-x:auto;
+    white-space:nowrap;
+
+    scrollbar-width:none;
+}
+
+nav::-webkit-scrollbar{
+    display:none;
+}
+
+nav button{
+    flex-shrink:0;
+
+    border:1px solid #ddd;
+
+    background:#fafafa;
+
+    color:#333;
+
+    padding:11px 17px;
+
+    border-radius:30px;
+
+    font-size:13px;
+    font-weight:bold;
+
+    cursor:pointer;
+
+    transition:.25s;
+}
+
+nav button:hover{
+    background:#eee;
+}
+
+nav button.active{
+    background:#8d1d22;
+    color:white;
+    border-color:#8d1d22;
+}
+
+
+/* =========================
+   INTRO
+========================= */
+
+.intro{
+    max-width:900px;
+    margin:auto;
+
+    text-align:center;
+
+    padding:32px 20px 18px;
+}
+
+.intro h1{
+    margin:0;
+
+    font-family:Georgia, serif;
+
+    font-size:27px;
+}
+
+.intro p{
+    margin:10px auto 0;
+
+    max-width:600px;
+
+    color:#666;
+
+    line-height:1.6;
+
+    font-size:14px;
+}
+
+
+/* =========================
+   SECTIONS
+========================= */
+
+.section{
+    display:none;
+
+    max-width:900px;
+
+    margin:auto;
+
+    padding:10px 16px 35px;
+}
+
+.section.active{
+    display:block;
+}
+
+
+/* =========================
+   SECTION TITLE
+========================= */
+
+.section-title{
+    display:flex;
+    align-items:center;
+
+    gap:12px;
+
+    margin:12px 0 18px;
+}
+
+.section-title:before,
+.section-title:after{
+    content:"";
+
+    height:1px;
+
+    background:#d2c8b7;
+
+    flex:1;
+}
+
+.section-title h2{
+    margin:0;
+
+    font-family:Georgia, serif;
+
+    font-size:22px;
+
+    color:#8d1d22;
+
+    white-space:nowrap;
+}
+
+
+/* =========================
+   PRODUCT CARD
+========================= */
+
+.card{
+    background:#fff;
+
+    border-radius:14px;
+
+    padding:18px;
+
+    margin-bottom:14px;
+
+    box-shadow:0 4px 15px rgba(0,0,0,.06);
+
+    border:1px solid #ebe6dc;
+
+    transition:.2s;
+}
+
+.card:hover{
+    transform:translateY(-2px);
+
+    box-shadow:0 7px 20px rgba(0,0,0,.09);
+}
+
+.card-header{
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    gap:15px;
+}
+
+.card h3{
+    margin:0;
+
+    font-family:Georgia, serif;
+
+    font-size:19px;
+}
+
+
+/* =========================
+   PRICES
+========================= */
+
+.prices{
+    display:flex;
+
+    gap:8px;
+
+    margin-top:15px;
+
+    flex-wrap:wrap;
+}
+
+.price-box{
+    flex:1;
+
+    min-width:110px;
+
+    background:#f5f1e9;
+
+    border-radius:9px;
+
+    padding:11px 8px;
+
+    text-align:center;
+
+    font-size:12px;
+
+    color:#666;
+}
+
+.price-box b{
+    display:block;
+
+    margin-top:4px;
+
+    color:#8d1d22;
+
+    font-size:17px;
+}
+
+
+/* =========================
+   SINGLE PRICE
+========================= */
+
+.single-price{
+    color:#8d1d22;
+
+    font-size:19px;
+
+    font-weight:bold;
+
+    white-space:nowrap;
+}
+
+
+/* =========================
+   CONTACT
+========================= */
+
+.contact{
+    max-width:900px;
+
+    margin:10px auto 35px;
+
+    padding:25px 20px;
+}
+
+.contact-box{
+    background:#fff;
+
+    border:1px solid #e5dfd3;
+
+    border-radius:16px;
+
+    padding:25px;
+
+    text-align:center;
+
+    box-shadow:0 4px 15px rgba(0,0,0,.05);
+}
+
+.contact-box h2{
+    margin:0 0 12px;
+
+    font-family:Georgia, serif;
+
+    color:#8d1d22;
+}
+
+.address{
+    color:#555;
+
+    line-height:1.6;
+
+    font-size:14px;
+
+    margin-bottom:10px;
+}
+
+.phone{
+    display:inline-block;
+
+    font-size:18px;
+
+    font-weight:bold;
+
+    color:#111;
+
+    text-decoration:none;
+}
+
+.hours{
+    margin-top:8px;
+
+    color:#777;
+
+    font-size:13px;
+}
+
+
+/* =========================
+   FOOTER
+========================= */
+
+footer{
+    background:#111;
+
+    color:white;
+
+    text-align:center;
+
+    padding:35px 20px;
+}
+
+.footer-logo{
+    width:65px;
+
+    height:65px;
+
+    object-fit:contain;
+
+    margin-bottom:10px;
+}
+
+footer h3{
+    margin:5px 0 8px;
+
+    font-family:Georgia, serif;
+
+    font-size:21px;
+}
+
+footer p{
+    margin:5px 0;
+
+    color:#bbb;
+
+    font-size:13px;
+}
+
+.footer-line{
+    width:50px;
+
+    height:2px;
+
+    background:#8d1d22;
+
+    margin:15px auto;
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media(max-width:600px){
+
+    .restaurant-name{
+        font-size:25px;
+    }
+
+    .logo{
+        width:75px;
+        height:75px;
+    }
+
+    .actions{
+        grid-template-columns:1fr 1fr;
+    }
+
+    .action-btn:last-child{
+        grid-column:1 / -1;
+    }
+
+    .intro{
+        padding-top:25px;
+    }
+
+    .intro h1{
+        font-size:23px;
+    }
+
+    .section{
+        padding-left:12px;
+        padding-right:12px;
+    }
+
+    .card{
+        padding:15px;
+    }
+
+    .card h3{
+        font-size:17px;
+    }
+
+    .price-box{
+        min-width:95px;
+    }
+
+}
+
 </style>
 </head>
 
+
 <body>
 
+
+<!-- =========================
+     HEADER
+========================= -->
+
 <header>
-  <img src="masafotosiyah.PNG">
-  <strong>Maşa Çorba Döner</strong>
+
+    <img
+        src="masafotosiyah.PNG"
+        class="logo"
+        alt="Maşa Çorba Döner">
+
+    <div class="restaurant-name">
+        Maşa Çorba Döner
+    </div>
+
+    <div class="subtitle">
+        LEZZETİN ADRESİ
+    </div>
+
 </header>
 
+
+<!-- =========================
+     ACTION BUTTONS
+========================= -->
+
+<div class="actions">
+
+
+    <!-- HEMEN ARA -->
+
+    <a
+        href="tel:+903465028058"
+        class="action-btn call">
+
+        📞 HEMEN ARA
+
+    </a>
+
+
+    <!-- YOL TARİFİ -->
+
+    <a
+        href="https://www.google.com/maps/search/?api=1&query=Ma%C5%9Fa%20%C3%87orba%20D%C3%B6ner%20Sivas"
+        target="_blank"
+        rel="noopener"
+        class="action-btn maps">
+
+        📍 YOL TARİFİ
+
+    </a>
+
+
+    <!-- DOĞRUDAN GOOGLE YORUM -->
+
+    <a
+        href="https://search.google.com/local/writereview?placeid=ChIJFbUmXpqrfkARX1o4Yqcwwb8"
+        target="_blank"
+        rel="noopener"
+        class="action-btn review">
+
+        ⭐ BİZİ DEĞERLENDİR
+
+    </a>
+
+</div>
+
+
+<!-- =========================
+     CATEGORY MENU
+========================= -->
+
 <nav>
-  <button class="active" onclick="showSection('doner',this)">DÖNER</button>
-  <button onclick="showSection('izgara',this)">IZGARA</button>
-  <button onclick="showSection('corba',this)">ÇORBA</button>
-  <button onclick="showSection('tatli',this)">TATLI</button>
-  <button onclick="showSection('icecek',this)">İÇECEK</button>
-  <button onclick="showSection('diger',this)">DİĞER</button>
+
+    <button
+        class="active"
+        onclick="showSection('doner',this)">
+
+        DÖNER
+
+    </button>
+
+
+    <button
+        onclick="showSection('izgara',this)">
+
+        IZGARA
+
+    </button>
+
+
+    <button
+        onclick="showSection('corba',this)">
+
+        ÇORBA
+
+    </button>
+
+
+    <button
+        onclick="showSection('tatli',this)">
+
+        TATLI
+
+    </button>
+
+
+    <button
+        onclick="showSection('icecek',this)">
+
+        İÇECEK
+
+    </button>
+
+
+    <button
+        onclick="showSection('diger',this)">
+
+        DİĞER
+
+    </button>
+
 </nav>
 
-<!-- DÖNER -->
+
+<!-- =========================
+     INTRO
+========================= -->
+
+<div class="intro">
+
+    <h1>Menümüz</h1>
+
+    <p>
+        Günlük hazırlanan lezzetlerimiz arasından
+        dilediğinizi seçebilirsiniz.
+    </p>
+
+</div>
+
+
+<!-- =========================
+     DÖNER
+========================= -->
+
 <div id="doner" class="section active">
-  <div class="card"><h3>Döner</h3><div class="prices">
-    <div class="price-box">1 Porsiyon<br><b>390₺</b></div>
-    <div class="price-box">Az Porsiyon<br><b>270₺</b></div>
-    <div class="price-box">1.5 Porsiyon<br><b>590₺</b></div>
-  </div></div>
 
-  <div class="card"><h3>Pilav Üstü Döner</h3><div class="prices">
-    <div class="price-box">1 Porsiyon<br><b>490₺</b></div>
-    <div class="price-box">Az Porsiyon<br><b>320₺</b></div>
-    <div class="price-box">1.5 Porsiyon<br><b>690₺</b></div>
-  </div></div>
+    <div class="section-title">
+        <h2>Döner</h2>
+    </div>
 
-  <div class="card"><h3>İskender</h3><div class="prices">
-    <div class="price-box">1 Porsiyon<br><b>520₺</b></div>
-    <div class="price-box">Az Porsiyon<br><b>400₺</b></div>
-    <div class="price-box">1.5 Porsiyon<br><b>600₺</b></div>
-  </div></div>
 
-  <div class="card"><h3>Az Döner + Az Köfte</h3><div class="prices">
-    <div class="price-box">1 Porsiyon<br><b>450₺</b></div>
-  </div></div>
+    <div class="card">
+
+        <div class="card-header">
+            <h3>Döner</h3>
+        </div>
+
+        <div class="prices">
+
+            <div class="price-box">
+                1 Porsiyon
+                <b>450₺</b>
+            </div>
+
+            <div class="price-box">
+                Az Porsiyon
+                <b>270₺</b>
+            </div>
+
+            <div class="price-box">
+                1.5 Porsiyon
+                <b>590₺</b>
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div class="card">
+
+        <div class="card-header">
+            <h3>Pilav Üstü Döner</h3>
+        </div>
+
+        <div class="prices">
+
+            <div class="price-box">
+                1 Porsiyon
+                <b>490₺</b>
+            </div>
+
+            <div class="price-box">
+                Az Porsiyon
+                <b>320₺</b>
+            </div>
+
+            <div class="price-box">
+                1.5 Porsiyon
+                <b>690₺</b>
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div class="card">
+
+        <div class="card-header">
+            <h3>İskender</h3>
+        </div>
+
+        <div class="prices">
+
+            <div class="price-box">
+                1 Porsiyon
+                <b>520₺</b>
+            </div>
+
+            <div class="price-box">
+                Az Porsiyon
+                <b>400₺</b>
+            </div>
+
+            <div class="price-box">
+                1.5 Porsiyon
+                <b>600₺</b>
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div class="card">
+
+        <div class="card-header">
+
+            <h3>Az Döner + Az Köfte</h3>
+
+            <span class="single-price">
+                450₺
+            </span>
+
+        </div>
+
+    </div>
+
 </div>
 
-<!-- IZGARA -->
+
+<!-- =========================
+     IZGARA
+========================= -->
+
 <div id="izgara" class="section">
-  <div class="card"><h3>Sivas Köfte</h3><div class="prices">
-    <div class="price-box">1 Porsiyon<br><b>390₺</b></div>
-    <div class="price-box">Az Porsiyon<br><b>270₺</b></div>
-    <div class="price-box">1.5 Porsiyon<br><b>590₺</b></div>
-  </div></div>
 
-  <div class="card"><h3>Adana</h3><div class="prices">
-    <div class="price-box">1 Porsiyon<br><b>420₺</b></div>
-    <div class="price-box">Az Porsiyon<br><b>280₺</b></div>
-    <div class="price-box">1.5 Porsiyon<br><b>600₺</b></div>
-  </div></div>
+    <div class="section-title">
+        <h2>Izgara</h2>
+    </div>
 
-  <div class="card"><h3>Et Biftek</h3><div class="prices">
-    <div class="price-box">1 Porsiyon<br><b>550₺</b></div>
-    <div class="price-box">Az Porsiyon<br><b>320₺</b></div>
-  </div></div>
 
-  <div class="card"><h3>Karışık Izgara</h3><div class="prices">
-    <div class="price-box">1 Porsiyon<br><b>700₺</b></div>
-    <div class="price-box">Az Porsiyon<br><b>350₺</b></div>
-    <div class="price-box">1.5 Porsiyon<br><b>950₺</b></div>
-  </div></div>
+    <div class="card">
 
-  <div class="card"><h3>Tavuk Şiş</h3><div class="prices">
-    <div class="price-box">1 Porsiyon<br><b>320₺</b></div>
-    <div class="price-box">Az Porsiyon<br><b>270₺</b></div>
-    <div class="price-box">1.5 Porsiyon<br><b>450₺</b></div>
-  </div></div>
+        <div class="card-header">
+            <h3>Sivas Köfte</h3>
+        </div>
 
-  <div class="card"><h3>Tavuk Biftek</h3><div class="prices">
-    <div class="price-box">1 Porsiyon<br><b>320₺</b></div>
-    <div class="price-box">Az Porsiyon<br><b>270₺</b></div>
-    <div class="price-box">1.5 Porsiyon<br><b>450₺</b></div>
-  </div></div>
+        <div class="prices">
+
+            <div class="price-box">
+                1 Porsiyon
+                <b>390₺</b>
+            </div>
+
+            <div class="price-box">
+                Az Porsiyon
+                <b>270₺</b>
+            </div>
+
+            <div class="price-box">
+                1.5 Porsiyon
+                <b>590₺</b>
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div class="card">
+
+        <div class="card-header">
+            <h3>Adana</h3>
+        </div>
+
+        <div class="prices">
+
+            <div class="price-box">
+                1 Porsiyon
+                <b>420₺</b>
+            </div>
+
+            <div class="price-box">
+                Az Porsiyon
+                <b>280₺</b>
+            </div>
+
+            <div class="price-box">
+                1.5 Porsiyon
+                <b>600₺</b>
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div class="card">
+
+        <div class="card-header">
+            <h3>Et Biftek</h3>
+        </div>
+
+        <div class="prices">
+
+            <div class="price-box">
+                1 Porsiyon
+                <b>550₺</b>
+            </div>
+
+            <div class="price-box">
+                Az Porsiyon
+                <b>320₺</b>
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div class="card">
+
+        <div class="card-header">
+            <h3>Karışık Izgara</h3>
+        </div>
+
+        <div class="prices">
+
+            <div class="price-box">
+                1 Porsiyon
+                <b>700₺</b>
+            </div>
+
+            <div class="price-box">
+                Az Porsiyon
+                <b>350₺</b>
+            </div>
+
+            <div class="price-box">
+                1.5 Porsiyon
+                <b>950₺</b>
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div class="card">
+
+        <div class="card-header">
+            <h3>Tavuk Şiş</h3>
+        </div>
+
+        <div class="prices">
+
+            <div class="price-box">
+                1 Porsiyon
+                <b>320₺</b>
+            </div>
+
+            <div class="price-box">
+                Az Porsiyon
+                <b>270₺</b>
+            </div>
+
+            <div class="price-box">
+                1.5 Porsiyon
+                <b>450₺</b>
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div class="card">
+
+        <div class="card-header">
+            <h3>Tavuk Biftek</h3>
+        </div>
+
+        <div class="prices">
+
+            <div class="price-box">
+                1 Porsiyon
+                <b>320₺</b>
+            </div>
+
+            <div class="price-box">
+                Az Porsiyon
+                <b>270₺</b>
+            </div>
+
+            <div class="price-box">
+                1.5 Porsiyon
+                <b>450₺</b>
+            </div>
+
+        </div>
+
+    </div>
+
 </div>
 
-<!-- ÇORBA -->
+
+<!-- =========================
+     ÇORBA
+========================= -->
+
 <div id="corba" class="section">
-  <div class="card"><h3>Atom</h3><div class="prices">
-    <div class="price-box">1 Porsiyon<br><b>320₺</b></div>
-    <div class="price-box">Az Porsiyon<br><b>250₺</b></div>
-  </div></div>
 
-  <div class="card"><h3>Kelle Paça</h3><div class="prices">
-    <div class="price-box">1 Porsiyon<br><b>300₺</b></div>
-    <div class="price-box">Az Porsiyon<br><b>220₺</b></div>
-  </div></div>
+    <div class="section-title">
+        <h2>Çorbalar</h2>
+    </div>
 
-  <div class="card"><h3>Ayak Paça</h3><div class="prices">
-    <div class="price-box">1 Porsiyon<br><b>280₺</b></div>
-    <div class="price-box">Az Porsiyon<br><b>210₺</b></div>
-  </div></div>
 
-  <div class="card"><h3>İşkembe</h3><div class="prices">
-    <div class="price-box">1 Porsiyon<br><b>270₺</b></div>
-    <div class="price-box">Az Porsiyon<br><b>200₺</b></div>
-  </div></div>
+    <div class="card">
 
-  <div class="card"><h3>Tuzlama</h3><div class="prices">
-    <div class="price-box">1 Porsiyon<br><b>320₺</b></div>
-    <div class="price-box">Az Porsiyon<br><b>250₺</b></div>
-  </div></div>
+        <div class="card-header">
+            <h3>Atom</h3>
+        </div>
 
-  <div class="card"><h3>Tavuk Çorba</h3><div class="prices">
-    <div class="price-box">1 Porsiyon<br><b>200₺</b></div>
-    <div class="price-box">Az Porsiyon<br><b>140₺</b></div>
-  </div></div>
+        <div class="prices">
 
-  <div class="card"><h3>Mercimek / Ezogelin</h3><div class="prices">
-    <div class="price-box">1 Porsiyon<br><b>170₺</b></div>
-    <div class="price-box">Az Porsiyon<br><b>130₺</b></div>
-  </div></div>
+            <div class="price-box">
+                1 Porsiyon
+                <b>320₺</b>
+            </div>
+
+            <div class="price-box">
+                Az Porsiyon
+                <b>250₺</b>
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div class="card">
+
+        <div class="card-header">
+            <h3>Kelle Paça</h3>
+        </div>
+
+        <div class="prices">
+
+            <div class="price-box">
+                1 Porsiyon
+                <b>300₺</b>
+            </div>
+
+            <div class="price-box">
+                Az Porsiyon
+                <b>220₺</b>
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div class="card">
+
+        <div class="card-header">
+            <h3>Ayak Paça</h3>
+        </div>
+
+        <div class="prices">
+
+            <div class="price-box">
+                1 Porsiyon
+                <b>280₺</b>
+            </div>
+
+            <div class="price-box">
+                Az Porsiyon
+                <b>210₺</b>
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div class="card">
+
+        <div class="card-header">
+            <h3>İşkembe</h3>
+        </div>
+
+        <div class="prices">
+
+            <div class="price-box">
+                1 Porsiyon
+                <b>270₺</b>
+            </div>
+
+            <div class="price-box">
+                Az Porsiyon
+                <b>200₺</b>
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div class="card">
+
+        <div class="card-header">
+            <h3>Tuzlama</h3>
+        </div>
+
+        <div class="prices">
+
+            <div class="price-box">
+                1 Porsiyon
+                <b>320₺</b>
+            </div>
+
+            <div class="price-box">
+                Az Porsiyon
+                <b>250₺</b>
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div class="card">
+
+        <div class="card-header">
+            <h3>Tavuk Çorba</h3>
+        </div>
+
+        <div class="prices">
+
+            <div class="price-box">
+                1 Porsiyon
+                <b>200₺</b>
+            </div>
+
+            <div class="price-box">
+                Az Porsiyon
+                <b>140₺</b>
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div class="card">
+
+        <div class="card-header">
+            <h3>Mercimek / Ezogelin</h3>
+        </div>
+
+        <div class="prices">
+
+            <div class="price-box">
+                1 Porsiyon
+                <b>170₺</b>
+            </div>
+
+            <div class="price-box">
+                Az Porsiyon
+                <b>130₺</b>
+            </div>
+
+        </div>
+
+    </div>
+
 </div>
 
-<!-- TATLI -->
+
+<!-- =========================
+     TATLI
+========================= -->
+
 <div id="tatli" class="section">
-  <div class="card"><h3>Sütlaç</h3><div class="prices"><div class="price-box">150₺</div></div></div>
-  <div class="card"><h3>Kadayıf</h3><div class="prices"><div class="price-box">180₺</div></div></div>
-  <div class="card"><h3>Baklava</h3><div class="prices"><div class="price-box">220₺</div></div></div>
-  <div class="card"><h3>Havuç Dilimi</h3><div class="prices"><div class="price-box">250₺</div></div></div>
+
+    <div class="section-title">
+        <h2>Tatlı</h2>
+    </div>
+
+
+    <div class="card">
+
+        <div class="card-header">
+
+            <h3>Sütlaç</h3>
+
+            <span class="single-price">
+                150₺
+            </span>
+
+        </div>
+
+    </div>
+
+
+    <div class="card">
+
+        <div class="card-header">
+
+            <h3>Kadayıf</h3>
+
+            <span class="single-price">
+                180₺
+            </span>
+
+        </div>
+
+    </div>
+
+
+    <div class="card">
+
+        <div class="card-header">
+
+            <h3>Baklava</h3>
+
+            <span class="single-price">
+                220₺
+            </span>
+
+        </div>
+
+    </div>
+
+
+    <div class="card">
+
+        <div class="card-header">
+
+            <h3>Havuç Dilimi</h3>
+
+            <span class="single-price">
+                250₺
+            </span>
+
+        </div>
+
+    </div>
+
 </div>
 
-<!-- İÇECEK -->
+
+<!-- =========================
+     İÇECEK
+========================= -->
+
 <div id="icecek" class="section">
-  <div class="card"><h3>Kola / Fanta / Gazoz</h3><div class="prices"><div class="price-box">70₺</div></div></div>
-  <div class="card"><h3>Küçük Ayran</h3><div class="prices"><div class="price-box">20₺</div></div></div>
-  <div class="card"><h3>Büyük Ayran</h3><div class="prices"><div class="price-box">40₺</div></div></div>
-  <div class="card"><h3>Açık Ayran</h3><div class="prices"><div class="price-box">50₺</div></div></div>
-  <div class="card"><h3>Meyve Suyu</h3><div class="prices"><div class="price-box">70₺</div></div></div>
-  <div class="card"><h3>Soda / Meyveli Soda</h3><div class="prices"><div class="price-box">30₺ / 40₺</div></div></div>
-  <div class="card"><h3>Şalgam</h3><div class="prices"><div class="price-box">60₺</div></div></div>
-  <div class="card"><h3>Su / Çay</h3><div class="prices"><div class="price-box">15₺</div></div></div>
+
+    <div class="section-title">
+        <h2>İçecek</h2>
+    </div>
+
+
+    <div class="card">
+
+        <div class="card-header">
+
+            <h3>Kola / Fanta / Gazoz</h3>
+
+            <span class="single-price">
+                70₺
+            </span>
+
+        </div>
+
+    </div>
+
+
+    <div class="card">
+
+        <div class="card-header">
+
+            <h3>Küçük Ayran</h3>
+
+            <span class="single-price">
+                20₺
+            </span>
+
+        </div>
+
+    </div>
+
+
+    <div class="card">
+
+        <div class="card-header">
+
+            <h3>Büyük Ayran</h3>
+
+            <span class="single-price">
+                40₺
+            </span>
+
+        </div>
+
+    </div>
+
+
+    <div class="card">
+
+        <div class="card-header">
+
+            <h3>Açık Ayran</h3>
+
+            <span class="single-price">
+                50₺
+            </span>
+
+        </div>
+
+    </div>
+
+
+    <div class="card">
+
+        <div class="card-header">
+
+            <h3>Meyve Suyu</h3>
+
+            <span class="single-price">
+                70₺
+            </span>
+
+        </div>
+
+    </div>
+
+
+    <div class="card">
+
+        <div class="card-header">
+
+            <h3>Soda / Meyveli Soda</h3>
+
+            <span class="single-price">
+                30₺ / 40₺
+            </span>
+
+        </div>
+
+    </div>
+
+
+    <div class="card">
+
+        <div class="card-header">
+
+            <h3>Şalgam</h3>
+
+            <span class="single-price">
+                60₺
+            </span>
+
+        </div>
+
+    </div>
+
+
+    <div class="card">
+
+        <div class="card-header">
+
+            <h3>Su / Çay</h3>
+
+            <span class="single-price">
+                15₺
+            </span>
+
+        </div>
+
+    </div>
+
 </div>
 
-<!-- DİĞER -->
+
+<!-- =========================
+     DİĞER
+========================= -->
+
 <div id="diger" class="section">
-  <div class="card"><h3>Pilav</h3><div class="prices">
-    <div class="price-box">1 Porsiyon<br><b>100₺</b></div>
-    <div class="price-box">Az Porsiyon<br><b>50₺</b></div>
-    <div class="price-box">1.5 Porsiyon<br><b>150₺</b></div>
-  </div></div>
 
-  <div class="card"><h3>Yoğurt</h3><div class="prices"><div class="price-box">150₺</div></div></div>
+    <div class="section-title">
+        <h2>Diğer</h2>
+    </div>
+
+
+    <div class="card">
+
+        <div class="card-header">
+
+            <h3>Pilav</h3>
+
+        </div>
+
+
+        <div class="prices">
+
+            <div class="price-box">
+
+                1 Porsiyon
+
+                <b>100₺</b>
+
+            </div>
+
+
+            <div class="price-box">
+
+                Az Porsiyon
+
+                <b>50₺</b>
+
+            </div>
+
+
+            <div class="price-box">
+
+                1.5 Porsiyon
+
+                <b>150₺</b>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div class="card">
+
+        <div class="card-header">
+
+            <h3>Yoğurt</h3>
+
+            <span class="single-price">
+                150₺
+            </span>
+
+        </div>
+
+    </div>
+
 </div>
+
+
+<!-- =========================
+     CONTACT
+========================= -->
+
+<div class="contact">
+
+    <div class="contact-box">
+
+        <h2>Maşa Çorba Döner</h2>
+
+
+        <div class="address">
+
+            📍 Atatürk Caddesi 95/A<br>
+            Sivas Merkez
+
+        </div>
+
+
+        <a
+            href="tel:+903465028058"
+            class="phone">
+
+            📞 0346 502 80 58
+
+        </a>
+
+
+        <div class="hours">
+
+            🕐 7/24 Açık
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- =========================
+     FOOTER
+========================= -->
+
+<footer>
+
+    <img
+        src="masafotosiyah.PNG"
+        class="footer-logo"
+        alt="Maşa Çorba Döner">
+
+
+    <h3>
+        Maşa Çorba Döner
+    </h3>
+
+
+    <div class="footer-line"></div>
+
+
+    <p>
+        Afiyet olsun.
+    </p>
+
+
+    <p>
+        © 2026 Maşa Çorba Döner
+    </p>
+
+</footer>
+
+
+<!-- =========================
+     JAVASCRIPT
+========================= -->
 
 <script>
+
 function showSection(id,btn){
-  document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
-  document.querySelectorAll('nav button').forEach(b=>b.classList.remove('active'));
-  document.getElementById(id).classList.add('active');
-  btn.classList.add('active');
+
+    document
+        .querySelectorAll('.section')
+        .forEach(section => {
+
+            section.classList.remove('active');
+
+        });
+
+
+    document
+        .querySelectorAll('nav button')
+        .forEach(button => {
+
+            button.classList.remove('active');
+
+        });
+
+
+    document
+        .getElementById(id)
+        .classList.add('active');
+
+
+    btn.classList.add('active');
+
+
+    window.scrollTo({
+
+        top:0,
+
+        behavior:"smooth"
+
+    });
+
 }
+
 </script>
+
 
 </body>
 </html>
-
