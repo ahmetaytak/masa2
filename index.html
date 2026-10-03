@@ -19,8 +19,46 @@ html{
 body{
     margin:0;
     font-family:Arial, Helvetica, sans-serif;
-    background:#f4f0e8;
+    background-color:#f4f0e8;
     color:#171717;
+    overflow-x:hidden;
+    position:relative;
+    background-image:
+        radial-gradient(circle at 50% 50%, transparent 0 7px, rgba(24,59,96,.16) 8px 9px, transparent 10px),
+        radial-gradient(circle at 50% 50%, transparent 0 15px, rgba(154,55,31,.13) 16px 17px, transparent 18px),
+        linear-gradient(45deg, transparent 45%, rgba(24,59,96,.12) 46% 48%, transparent 49%),
+        linear-gradient(-45deg, transparent 45%, rgba(154,55,31,.10) 46% 48%, transparent 49%);
+    background-size:72px 72px;
+    background-position:0 0,36px 36px,0 0,36px 36px;
+}
+
+body::before{
+    content:"";
+    position:fixed;
+    inset:0;
+    pointer-events:none;
+    z-index:-1;
+    opacity:.48;
+    background-image:
+        radial-gradient(ellipse at center, transparent 0 20px, rgba(24,59,96,.11) 21px 22px, transparent 23px),
+        radial-gradient(ellipse at center, transparent 0 28px, rgba(154,55,31,.08) 29px 30px, transparent 31px);
+    background-size:144px 144px;
+    background-position:0 0,72px 72px;
+}
+
+body::after{
+    content:"";
+    position:fixed;
+    left:0;
+    right:0;
+    top:0;
+    bottom:0;
+    pointer-events:none;
+    z-index:-1;
+    opacity:.22;
+    background:
+        repeating-linear-gradient(90deg, transparent 0 35px, rgba(24,59,96,.12) 36px 37px, transparent 38px 72px),
+        repeating-linear-gradient(0deg, transparent 0 35px, rgba(154,55,31,.10) 36px 37px, transparent 38px 72px);
 }
 
 
@@ -34,7 +72,22 @@ header{
     text-align:center;
     padding:28px 20px 24px;
     border-bottom:4px solid #8d1d22;
+    position:relative;
+    overflow:hidden;
 }
+
+header::before,
+header::after{
+    content:"✦";
+    position:absolute;
+    top:10px;
+    color:#d8c8aa;
+    font-size:46px;
+    opacity:.22;
+}
+
+header::before{left:20px;}
+header::after{right:20px;}
 
 .logo{
     width:85px;
@@ -63,7 +116,7 @@ header{
 ========================= */
 
 .actions{
-    max-width:900px;
+    max-width:1100px;
     margin:0 auto;
     padding:16px 16px 8px;
 
@@ -119,9 +172,9 @@ nav{
     top:0;
     z-index:100;
 
-    background:#fff;
+    background:rgba(255,252,245,.96);
 
-    border-bottom:1px solid #ddd;
+    border-bottom:1px solid #d8c8aa;
 
     box-shadow:0 3px 15px rgba(0,0,0,.08);
 
@@ -177,13 +230,26 @@ nav button.active{
 ========================= */
 
 .intro{
-    max-width:900px;
+    max-width:1100px;
     margin:auto;
-
     text-align:center;
-
     padding:32px 20px 18px;
+    position:relative;
 }
+
+.intro::before,
+.intro::after{
+    content:"❧";
+    position:absolute;
+    top:30px;
+    color:#183b60;
+    font-size:42px;
+    opacity:.20;
+}
+
+.intro::before{left:4%;}
+.intro::after{right:4%; transform:scaleX(-1);}
+
 
 .intro h1{
     margin:0;
@@ -212,17 +278,17 @@ nav button.active{
 
 .section{
     display:none;
-
-    max-width:900px;
-
+    max-width:1100px;
     margin:auto;
-
     padding:10px 16px 35px;
 }
 
 .section.active{
-    display:block;
+    display:grid;
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:14px;
 }
+
 
 
 /* =========================
@@ -236,6 +302,7 @@ nav button.active{
     gap:12px;
 
     margin:12px 0 18px;
+    grid-column:1 / -1;
 }
 
 .section-title:before,
@@ -267,7 +334,7 @@ nav button.active{
 ========================= */
 
 .card{
-    background:#fff;
+    background:rgba(255,255,255,.91);
 
     border-radius:14px;
 
@@ -364,6 +431,185 @@ nav button.active{
     white-space:nowrap;
 }
 
+
+/* =========================
+   PREMIUM ÇİNİ KARTLAR
+========================= */
+.card{
+    position:relative;
+    overflow:hidden;
+    border:1px solid rgba(24,59,96,.16);
+}
+
+.card::before{
+    content:"";
+    position:absolute;
+    left:0;
+    top:0;
+    bottom:0;
+    width:4px;
+    background:linear-gradient(to bottom,#183b60 0 50%,#9a371f 50% 100%);
+    opacity:.9;
+}
+
+.card::after{
+    content:"✦";
+    position:absolute;
+    right:12px;
+    bottom:5px;
+    font-size:34px;
+    color:#183b60;
+    opacity:.055;
+    pointer-events:none;
+}
+
+.price-box{
+    border:1px solid rgba(24,59,96,.07);
+}
+
+/* Çini bordürleri */
+.intro{
+    border-top:2px solid rgba(24,59,96,.22);
+    border-bottom:2px solid rgba(154,55,31,.18);
+}
+
+.intro h1::before,
+.intro h1::after{
+    content:"❧";
+    display:inline-block;
+    color:#183b60;
+    opacity:.55;
+    margin:0 12px;
+    font-size:18px;
+}
+
+.section-title h2{
+    padding:7px 16px;
+    border:1px solid rgba(24,59,96,.16);
+    border-radius:30px;
+    background:rgba(244,240,232,.82);
+}
+
+/* =========================
+   GOOGLE DEĞERLENDİRME
+========================= */
+.google-review{
+    max-width:900px;
+    margin:0 auto 35px;
+    padding:0 20px;
+}
+
+.google-review-box{
+    position:relative;
+    overflow:hidden;
+    background:linear-gradient(135deg,rgba(255,255,255,.96),rgba(247,241,228,.94));
+    border:1px solid rgba(24,59,96,.18);
+    border-radius:18px;
+    padding:30px 24px;
+    text-align:center;
+    box-shadow:0 7px 25px rgba(0,0,0,.07);
+}
+
+.google-review-box::before,
+.google-review-box::after{
+    content:"❧";
+    position:absolute;
+    color:#183b60;
+    font-size:62px;
+    opacity:.10;
+}
+
+.google-review-box::before{left:15px;top:8px;}
+.google-review-box::after{right:15px;bottom:0;transform:scaleX(-1);}
+
+.google-review-box h2{
+    margin:0 0 8px;
+    font-family:Georgia,serif;
+    color:#8d1d22;
+}
+
+.google-review-box p{
+    margin:0 auto 18px;
+    color:#666;
+    font-size:14px;
+}
+
+.review-big-btn{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    gap:8px;
+    padding:13px 24px;
+    border-radius:30px;
+    background:#e7c15a;
+    color:#222;
+    text-decoration:none;
+    font-weight:bold;
+    box-shadow:0 4px 12px rgba(0,0,0,.10);
+    transition:.2s;
+}
+
+.review-big-btn:hover{
+    transform:translateY(-2px);
+}
+
+/* =========================
+   MOBİL SABİT HIZLI MENÜ
+========================= */
+.mobile-bar{
+    display:none;
+}
+
+@media(max-width:600px){
+    body{
+        padding-bottom:72px;
+    }
+
+    .mobile-bar{
+        position:fixed;
+        left:10px;
+        right:10px;
+        bottom:10px;
+        z-index:9999;
+        display:grid;
+        grid-template-columns:repeat(3,1fr);
+        gap:6px;
+        padding:7px;
+        border-radius:18px;
+        background:rgba(17,17,17,.96);
+        box-shadow:0 8px 28px rgba(0,0,0,.25);
+        border:1px solid rgba(216,200,170,.35);
+    }
+
+    .mobile-bar a{
+        min-height:48px;
+        display:flex;
+        flex-direction:column;
+        align-items:center;
+        justify-content:center;
+        gap:2px;
+        color:#fff;
+        text-decoration:none;
+        border-radius:12px;
+        font-size:10px;
+        font-weight:bold;
+    }
+
+    .mobile-bar a:nth-child(1){background:#8d1d22;}
+    .mobile-bar a:nth-child(2){background:#183b60;}
+    .mobile-bar a:nth-child(3){background:#e7c15a;color:#222;}
+    .mobile-bar span{font-size:18px;line-height:18px;}
+
+    .google-review{
+        padding-left:12px;
+        padding-right:12px;
+    }
+
+    .intro h1::before,
+    .intro h1::after{
+        margin:0 6px;
+    }
+}
 
 /* =========================
    CONTACT
@@ -500,9 +746,6 @@ footer p{
         grid-template-columns:1fr 1fr;
     }
 
-    .action-btn:last-child{
-        grid-column:1 / -1;
-    }
 
     .intro{
         padding-top:25px;
@@ -515,6 +758,14 @@ footer p{
     .section{
         padding-left:12px;
         padding-right:12px;
+    }
+
+    .section.active{
+        grid-template-columns:1fr;
+    }
+
+    .section-title{
+        grid-column:1;
     }
 
     .card{
@@ -591,16 +842,14 @@ footer p{
     </a>
 
 
-    <!-- DOĞRUDAN GOOGLE YORUM -->
 
+    <!-- BİZİ DEĞERLENDİR -->
     <a
         href="https://search.google.com/local/writereview?placeid=ChIJFbUmXpqrfkARX1o4Yqcwwb8"
         target="_blank"
         rel="noopener"
         class="action-btn review">
-
         ⭐ BİZİ DEĞERLENDİR
-
     </a>
 
 </div>
@@ -1505,6 +1754,30 @@ footer p{
         </div>
 
     </div>
+
+</div>
+
+
+<!-- =========================
+     MOBİL HIZLI MENÜ
+========================= -->
+
+<div class="mobile-bar">
+
+    <a href="tel:+903465028058">
+        <span>📞</span>
+        Ara
+    </a>
+
+    <a href="https://www.google.com/maps/search/?api=1&query=Ma%C5%9Fa%20%C3%87orba%20D%C3%B6ner%20Sivas" target="_blank" rel="noopener">
+        <span>📍</span>
+        Yol Tarifi
+    </a>
+
+    <a href="https://search.google.com/local/writereview?placeid=ChIJFbUmXpqrfkARX1o4Yqcwwb8" target="_blank" rel="noopener">
+        <span>⭐</span>
+        Yorum
+    </a>
 
 </div>
 
